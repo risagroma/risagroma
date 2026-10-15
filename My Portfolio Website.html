@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Riski AR — IT Support</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #0d110a;
+            --bg2: #1a2114;
+            --card: rgba(163, 193, 58, .06);
+            --line: rgba(163, 193, 58, .28);
+            --text: #e8ecd8;
+            --muted: rgba(232, 236, 216, .68);
+            --acc: #a3c13a;
+            --acc2: #e0a526;
+            --on: #0d110a;
+            --stencil: 'Black Ops One', Impact, sans-serif;
+            --font: 'Rajdhani', system-ui, sans-serif;
+            --mono: 'Share Tech Mono', ui-monospace, monospace;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        @media (prefers-color-scheme:light) {
+            :root:not([data-theme="dark"]) {
+                --bg: #e8e2cd;
+                --bg2: #d8d0b3;
+                --card: rgba(40, 50, 20, .07);
+                --line: rgba(40, 50, 20, .3);
+                --text: #1c2112;
+                --muted: rgba(28, 33, 18, .72);
+                --acc: #4a5d1a;
+                --acc2: #9a6200;
+                --on: #f4efdc
+            }
+        }
+
+        :root[data-theme="light"] {
+            --bg: #e8e2cd;
+            --bg2: #d8d0b3;
+            --card: rgba(40, 50, 20, .07);
+            --line: rgba(40, 50, 20, .3);
+            --text: #1c2112;
+            --muted: rgba(28, 33, 18, .72);
+            --acc: #4a5d1a;
+            --acc2: #9a6200;
+            --on: #f4efdc
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0d110a;
+            --bg2: #1a2114;
+            --card: rgba(163, 193, 58, .06);
+            --line: rgba(163, 193, 58, .28);
+            --text: #e8ecd8;
+            --muted: rgba(232, 236, 216, .68);
+            --acc: #a3c13a;
+            --acc2: #e0a526;
+            --on: #0d110a
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 70px)
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 1.05rem;
+            line-height: 1.55;
+            overflow-x: hidden
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(420px 300px at 15% 20%, rgba(90, 105, 40, .35), transparent), radial-gradient(500px 360px at 85% 40%, rgba(120, 95, 50, .25), transparent), radial-gradient(380px 300px at 40% 90%, rgba(60, 75, 35, .4), transparent)
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .12) 0 1px, transparent 1px 3px), linear-gradient(var(--line) 1px, transparent 1px) 0 0/80px 80px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/80px 80px;
+            opacity: .22
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .wrap {
+            max-width: 1060px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        .ticker {
+            background: var(--acc2);
+            color: #13160c;
+            font-family: var(--mono);
+            font-size: .78rem;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 5px 0;
+            border-bottom: 2px solid #13160c
+        }
+
+        .ticker span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: tick 34s linear infinite
+        }
+
+        @keyframes tick {
+            to {
+                transform: translateX(-100%)
+            }
+        }
+
+        nav {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 50;
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line)
+        }
+
+        nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 58px
+        }
+
+        .logo {
+            font-family: var(--stencil);
+            font-size: 1.15rem;
+            letter-spacing: .06em;
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .logo svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--acc)
+        }
+
+        .links {
+            display: flex;
+            gap: 2px;
+            align-items: center
+        }
+
+        .links a {
+            padding: 6px 11px;
+            font-family: var(--mono);
+            font-size: .8rem;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: .2s
+        }
+
+        .links a:hover {
+            color: var(--acc);
+            background: var(--card)
+        }
+
+        #theme {
+            background: none;
+            border: 1px solid var(--line);
+            color: var(--acc);
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+            margin-left: 6px
+        }
+
+        section {
+            padding: 44px 0
+        }
+
+        .tag {
+            font-family: var(--mono);
+            color: var(--acc2);
+            font-size: .82rem;
+            letter-spacing: .12em;
+            display: block;
+            margin-bottom: 6px
+        }
+
+        h2 {
+            font-family: var(--stencil);
+            font-weight: 400;
+            font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--acc) 0 10px, transparent 10px 16px);
+            opacity: .5
+        }
+
+        .card {
+            position: relative;
+            background: var(--card);
+            border: 1px solid var(--line);
+            padding: 22px;
+            clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+            transition: .25s
+        }
+
+        .card:hover {
+            border-color: var(--acc);
+            background: color-mix(in srgb, var(--acc) 11%, transparent);
+            transform: translateY(-3px)
+        }
+
+        .hero {
+            padding: 44px 0 12px
+        }
+
+        .hero .wrap {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+            align-items: center
+        }
+
+        .status {
+            font-family: var(--mono);
+            font-size: .82rem;
+            color: var(--acc);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .status i {
+            width: 9px;
+            height: 9px;
+            background: var(--acc);
+            border-radius: 50%;
+            animation: pulse 1.6s infinite
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: .25
+            }
+        }
+
+        h1 {
+            font-family: var(--stencil);
+            font-weight: 400;
+            font-size: clamp(2.4rem, 7.5vw, 4.8rem);
+            line-height: 1;
+            text-transform: uppercase;
+            margin: 16px 0 12px
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--acc)
+        }
+
+        .role {
+            font-family: var(--mono);
+            color: var(--acc2);
+            font-size: clamp(.95rem, 2.4vw, 1.2rem);
+            min-height: 1.7em
+        }
+
+        .role::before {
+            content: "> "
+        }
+
+        .role::after {
+            content: "█";
+            animation: blink 1s steps(1) infinite
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0
+            }
+        }
+
+        .lead {
+            color: var(--muted);
+            max-width: 560px;
+            margin: 16px 0 26px;
+            font-size: 1.15rem
+        }
+
+        .btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            font-family: var(--mono);
+            text-transform: uppercase;
+            font-size: .88rem;
+            letter-spacing: .06em;
+            padding: 12px 22px;
+            border: 1px solid var(--acc);
+            color: var(--acc);
+            display: inline-block;
+            transition: .2s;
+            cursor: pointer;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)
+        }
+
+        .btn.p {
+            background: var(--acc);
+            color: var(--on);
+            font-weight: 700
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.15)
+        }
+
+        .dog {
+            width: min(260px, 100%);
+            margin: 0 auto;
+            padding: 26px 22px;
+            border-radius: 26px;
+            color: #1a1f14;
+            font-family: var(--mono);
+            background: linear-gradient(135deg, #dfe2d6, #8b9185 48%, #d3d7cb);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .45), inset 0 0 0 3px rgba(255, 255, 255, .35);
+            transform: rotate(-5deg);
+            position: relative;
+            animation: sway 6s ease-in-out infinite;
+            transform-origin: 50% 0
+        }
+
+        @keyframes sway {
+            50% {
+                transform: rotate(4deg)
+            }
+        }
+
+        .dog::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            margin-left: -8px;
+            border-radius: 50%;
+            background: var(--bg);
+            box-shadow: inset 0 2px 4px #000
+        }
+
+        .dog h3 {
+            font-family: var(--stencil);
+            font-weight: 400;
+            font-size: 1.5rem;
+            margin: 22px 0 8px;
+            text-align: center;
+            letter-spacing: .05em
+        }
+
+        .dog p {
+            font-size: .8rem;
+            border-top: 1px solid rgba(0, 0, 0, .35);
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px;
+            margin-top: 32px
+        }
+
+        .stat b {
+            font-family: var(--stencil);
+            font-weight: 400;
+            font-size: 2.4rem;
+            color: var(--acc);
+            display: block;
+            line-height: 1
+        }
+
+        .stat span {
+            font-family: var(--mono);
+            font-size: .75rem;
+            color: var(--muted);
+            text-transform: uppercase
+        }
+
+        .dossier {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 16px
+        }
+
+        .dossier h3 {
+            font-family: var(--mono);
+            color: var(--acc2);
+            font-size: .9rem;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .dossier p {
+            color: var(--muted)
+        }
+
+        .stamp {
+            position: absolute;
+            right: 14px;
+            top: 14px;
+            font-family: var(--stencil);
+            color: #c0392b;
+            border: 3px solid #c0392b;
+            padding: 2px 10px;
+            transform: rotate(8deg);
+            opacity: .75;
+            font-size: 1.1rem;
+            letter-spacing: .1em
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px
+        }
+
+        .chip {
+            font-family: var(--mono);
+            font-size: .74rem;
+            padding: 3px 9px;
+            border: 1px solid var(--line);
+            color: var(--acc);
+            text-transform: uppercase
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px
+        }
+
+        .skill {
+            margin-bottom: 18px;
+            padding-left: 14px;
+            border-left: 3px solid var(--acc)
+        }
+
+        .sk-h {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--mono);
+            font-size: .9rem;
+            text-transform: uppercase
+        }
+
+        .sk-h em {
+            font-style: normal;
+            font-size: .7rem;
+            background: var(--acc);
+            color: var(--on);
+            padding: 2px 9px;
+            letter-spacing: .08em
+        }
+
+        .skill p {
+            color: var(--muted);
+            font-size: .98rem;
+            margin-top: 4px
+        }
+
+        .legend {
+            font-family: var(--mono);
+            font-size: .72rem;
+            color: var(--muted);
+            border-top: 1px dashed var(--line);
+            padding-top: 10px;
+            margin-top: 6px;
+            line-height: 1.7
+        }
+
+        .bar {
+            height: 12px;
+            background: var(--card);
+            -webkit-mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 3px), transparent calc(10% - 3px) 10%);
+            mask: repeating-linear-gradient(90deg, #000 0 calc(10% - 3px), transparent calc(10% - 3px) 10%)
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--acc), var(--acc2));
+            transition: width 1.3s steps(10)
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 22px
+        }
+
+        .filters button {
+            font-family: var(--mono);
+            text-transform: uppercase;
+            font-size: .8rem;
+            padding: 7px 16px;
+            border: 1px solid var(--line);
+            background: none;
+            color: var(--muted);
+            cursor: pointer
+        }
+
+        .filters button.on {
+            background: var(--acc);
+            color: var(--on);
+            border-color: var(--acc)
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+            gap: 16px
+        }
+
+        .proj {
+            padding: 0;
+            display: flex;
+            flex-direction: column
+        }
+
+        .proj.hide {
+            display: none
+        }
+
+        .thumb {
+            aspect-ratio: 16/10;
+            display: grid;
+            place-items: center;
+            font-size: 2.5rem;
+            background: repeating-linear-gradient(45deg, rgba(0, 0, 0, .18) 0 8px, transparent 8px 16px), linear-gradient(135deg, var(--bg2), color-mix(in srgb, var(--acc) 22%, var(--bg2)));
+            position: relative
+        }
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-family: var(--mono);
+            font-size: .68rem;
+            background: var(--acc2);
+            color: #13160c;
+            padding: 2px 8px
+        }
+
+        .proj .in {
+            padding: 16px 18px 20px
+        }
+
+        .proj small {
+            font-family: var(--mono);
+            color: var(--acc2);
+            font-size: .72rem
+        }
+
+        .proj h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase
+        }
+
+        .proj p {
+            color: var(--muted);
+            font-size: .95rem;
+            margin: 4px 0
+        }
+
+        .tl {
+            border-left: 2px dashed var(--line);
+            margin-left: 10px;
+            padding-left: 30px
+        }
+
+        .tl-i {
+            position: relative;
+            margin-bottom: 26px
+        }
+
+        .tl-i::before {
+            content: "";
+            position: absolute;
+            left: -43px;
+            top: 4px;
+            width: 22px;
+            height: 22px;
+            background: var(--acc);
+            clip-path: polygon(0 0, 50% 30%, 100% 0, 100% 45%, 50% 75%, 0 45%)
+        }
+
+        .tl-i small {
+            font-family: var(--mono);
+            color: var(--acc2);
+            font-size: .78rem
+        }
+
+        .tl-i h3 {
+            font-size: 1.3rem;
+            text-transform: uppercase
+        }
+
+        .tl-i .co {
+            color: var(--muted)
+        }
+
+        .certs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+            gap: 16px
+        }
+
+        .cert {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start
+        }
+
+        .cert .ic {
+            flex: none;
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            font-size: 1.4rem;
+            background: var(--acc);
+            clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)
+        }
+
+        .cert h3 {
+            font-size: 1.05rem;
+            line-height: 1.25;
+            text-transform: uppercase
+        }
+
+        .cert p {
+            color: var(--muted);
+            font-size: .9rem;
+            margin: 3px 0 6px
+        }
+
+        .cert a {
+            font-family: var(--mono);
+            font-size: .76rem;
+            color: var(--acc)
+        }
+
+        .contact {
+            text-align: center
+        }
+
+        .contact h2 {
+            justify-content: center
+        }
+
+        .contact h2::after {
+            display: none
+        }
+
+        .contact .btns {
+            justify-content: center
+        }
+
+        .lang {
+            display: flex;
+            margin-left: 6px;
+            border: 1px solid var(--line)
+        }
+
+        .lang button {
+            background: none;
+            border: 0;
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: .72rem;
+            padding: 0 8px;
+            height: 32px;
+            cursor: pointer
+        }
+
+        .lang button.on {
+            background: var(--acc);
+            color: var(--on)
+        }
+
+        footer {
+            padding: 26px 0;
+            text-align: center;
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: .78rem;
+            border-top: 1px solid var(--line)
+        }
+
+        .rv {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: .6s ease
+        }
+
+        .rv.in {
+            opacity: 1;
+            transform: none
+        }
+
+        @media(max-width:780px) {
+            .links a:not(#theme) {
+                display: none
+            }
+
+            .hero .wrap,
+            .dossier,
+            .two {
+                grid-template-columns: 1fr
+            }
+
+            section {
+                padding: 32px 0
+            }
+
+            .dog {
+                margin-top: 20px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .rv {
+                opacity: 1;
+                transform: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ticker"><span>STATUS: SIAGA // CLEARANCE: LEVEL 5 // GRID: 00°28'S 117°09'E // MISI: BANGUN SOFTWARE
+            ANDAL // CALLSIGN: RISKI-AR // STATUS: SIAGA // CLEARANCE: LEVEL 5 //</span></div>
+    <nav>
+        <div class="wrap">
+            <a href="#top" class="logo"><svg viewBox="0 0 24 24">
+                    <path d="M12 2l9 5v3l-9 5-9-5V7zM3 13l9 5 9-5v3l-9 5-9-5z" />
+                </svg>RISKI·AR</a>
+            <div class="links"><a href="#about">Dossier</a><a href="#skills">Loadout</a><a href="#projects">Misi</a><a
+                    href="#experience">Rekam Dinas</a><a href="#certs">Tanda Jasa</a><a href="#contact">Komunikasi</a>
+                <div class="lang" id="lang" role="group" aria-label="Bahasa"><button data-l="id"
+                        class="on">ID</button><button data-l="en">EN</button></div><button id="theme"
+                    aria-label="Ganti tema">◐</button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="top">
+        <header class="hero">
+            <div class="wrap">
+                <div>
+                    <div class="status"><i></i>OPERATOR AKTIF - SIAP DITUGASKAN</div>
+                    <h1>Riski <em>AR</em></h1>
+                    <div class="role" id="role"></div>
+                    <p class="lead">Software engineer berfokus pada Android &amp; Java. Disiplin, presisi, dan tuntas - dari layar ponsel sampai ke ladang.</p>
+                    <div class="btns"><a class="btn p" href="#projects">Lihat Misi</a><a class="btn"
+                            href="#contact">Buka Kanal</a></div>
+                </div>
+                <div class="dog rv">
+                    <h3>RISKI AR</h3>
+                    <p><span>NRP</span><span>RAR-0001</span></p>
+                    <p><span>KORPS</span><span>SOFTWARE</span></p>
+                    <p><span>SATUAN</span><span>ANDROID/JAVA</span></p>
+                    <p><span>KLEARANS</span><span>LEVEL 5</span></p>
+                </div>
+            </div>
+            <div class="wrap">
+                <div class="stats">
+                    <div class="card stat rv"><b data-n="5">0</b><span>Penugasan</span></div>
+                    <div class="card stat rv"><b data-n="8">0</b><span>Misi selesai</span></div>
+                    <div class="card stat rv"><b data-n="6">0</b><span>Bulan Bangkit</span></div>
+                    <div class="card stat rv"><b data-n="12">0</b><span>Tahun freelance</span></div>
+                </div>
+            </div>
+        </header>
+
+        <section id="about">
+            <div class="wrap">
+                <span class="tag">// DOSSIER PERSONEL</span>
+                <h2>Brifing</h2>
+                <div class="dossier">
+                    <div class="card rv"><span class="stamp">TERBUKA</span>
+                        <h3>Latar belakang</h3>
+                        <p>Lulusan Sarjana Informatika yang sebelumnya merupakan lulusan SMK jurusan Teknik Komputer dan Jaringan. Berkomitmen terus belajar dan berkembang di bidang software, khususnya
+                            pengembangan Android.</p>
+                        <div class="chips"><span class="chip">Android</span><span class="chip">Java</span><span
+                                class="chip">Jaringan</span></div>
+                    </div>
+                    <div class="card rv">
+                        <h3>Pelatihan lapangan</h3>
+                        <p>Memiliki pengalaman magang di ISP, konsultan IT, dan jasa komputer &amp; CCTV. Terbiasa troubleshooting
+                            hardware dan software.</p>
+                        <h3 style="margin-top:14px">Misi sampingan</h3>
+                        <p>Petani - disiplin dan kesabaran dari ladang ikut membentuk cara kerja.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="wrap two">
+                <div class="rv"><span class="tag">// LOADOUT</span>
+                    <h2>Persenjataan</h2>
+                    <div class="skill">
+                        <div class="sk-h"><span>Java</span><em>Mahir</em></div>
+                        <p>Membangun aplikasi dengan OOP, struktur data, dan akses database SQL.</p>
+                    </div>
+                    <div class="skill">
+                        <div class="sk-h"><span>Android / Kotlin</span><em>Menengah–Mahir</em></div>
+                        <p>Mengembangkan aplikasi mobile: antarmuka, konsumsi REST API, dan Firebase (Bangkit Academy).
+                        </p>
+                    </div>
+                    <div class="skill">
+                        <div class="sk-h"><span>Jaringan &amp; Troubleshooting</span><em>Mahir</em></div>
+                        <p>Konfigurasi jaringan, instalasi CCTV, serta diagnosis masalah hardware dan software.</p>
+                    </div>
+                    <div class="skill">
+                        <div class="sk-h"><span>Web (HTML/CSS/JS)</span><em>Menengah</em></div>
+                        <p>Membuat halaman responsif dan interaktif secara mandiri.</p>
+                    </div>
+                    <div class="legend">DASAR — memahami konsep<br>MENENGAH — bekerja mandiri pada tugas nyata<br>MAHIR
+                        — merancang solusi &amp; dapat membimbing orang lain</div>
+                </div>
+                <div class="rv"><span class="tag">// PERALATAN</span>
+                    <h2>Teknologi</h2>
+                    <div class="chips"><span class="chip">Java</span><span class="chip">Kotlin</span><span
+                            class="chip">Android Studio</span><span class="chip">Jetpack Compose</span><span
+                            class="chip">Firebase</span><span class="chip">REST API</span><span
+                            class="chip">SQL</span><span class="chip">Git</span><span class="chip">Linux</span><span
+                            class="chip">Networking</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="wrap">
+                <span class="tag">// ARSIP OPERASI</span>
+                <h2>Misi</h2>
+                <div class="filters" id="filters"><button class="on" data-f="all">Semua</button><button
+                        data-f="mobile">Mobile</button><button data-f="backend">Software</button><button
+                        data-f="other">Lainnya</button></div>
+                <div class="grid">
+                    <a href="#" class="card proj rv" data-c="mobile">
+                        <div class="thumb"><span class="badge">SELESAI</span>📱</div>
+                        <div class="in"><small>OP-001</small>
+                            <h3>Aplikasi Android 1</h3>
+                            <p>Deskripsi singkat misi dan masalah yang diselesaikan.</p>
+                            <div class="chips"><span class="chip">Kotlin</span><span class="chip">Firebase</span></div>
+                        </div>
+                    </a>
+                    <a href="#" class="card proj rv" data-c="mobile">
+                        <div class="thumb"><span class="badge">SELESAI</span>🚀</div>
+                        <div class="in"><small>OP-002</small>
+                            <h3>Capstone Bangkit</h3>
+                            <p>Proyek akhir Bangkit Academy sebagai Mobile Developer.</p>
+                            <div class="chips"><span class="chip">Android</span><span class="chip">API</span></div>
+                        </div>
+                    </a>
+                    <a href="#" class="card proj rv" data-c="backend">
+                        <div class="thumb"><span class="badge">SELESAI</span>☕</div>
+                        <div class="in"><small>OP-003</small>
+                            <h3>Aplikasi Java</h3>
+                            <p>Aplikasi berbasis Java dengan arsitektur bersih.</p>
+                            <div class="chips"><span class="chip">Java</span><span class="chip">SQL</span></div>
+                        </div>
+                    </a>
+                    <a href="#" class="card proj rv" data-c="backend">
+                        <div class="thumb"><span class="badge">AKTIF</span>🔌</div>
+                        <div class="in"><small>OP-004</small>
+                            <h3>REST API Service</h3>
+                            <p>Layanan backend pendukung aplikasi mobile.</p>
+                            <div class="chips"><span class="chip">Java</span><span class="chip">REST</span></div>
+                        </div>
+                    </a>
+                    <a href="#" class="card proj rv" data-c="other">
+                        <div class="thumb"><span class="badge">AKTIF</span>🌾</div>
+                        <div class="in"><small>OP-005</small>
+                            <h3>Digitalisasi Pertanian</h3>
+                            <p>Menghubungkan teknologi dengan pertanian.</p>
+                            <div class="chips"><span class="chip">Riset</span></div>
+                        </div>
+                    </a>
+                    <a href="#" class="card proj rv" data-c="other">
+                        <div class="thumb"><span class="badge">SELESAI</span>🎥</div>
+                        <div class="in"><small>OP-006</small>
+                            <h3>Instalasi CCTV &amp; Jaringan</h3>
+                            <p>Pemasangan dan konfigurasi jaringan serta CCTV.</p>
+                            <div class="chips"><span class="chip">Network</span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="wrap">
+                <span class="tag">// REKAM DINAS</span>
+                <h2>Penugasan</h2>
+                <div class="tl">
+                    <div class="tl-i rv"><small>01 JAN 2024 – 30 JUN 2024 · 6 BULAN</small>
+                        <h3>Mobile Developer</h3><span class="co">Bangkit Academy</span>
+                    </div>
+                    <div class="tl-i rv"><small>01 MAR 2020 – 30 MAR 2020 · 1 BULAN 2 MINGGU</small>
+                        <h3>Network Technician</h3><span class="co">CV. Mustofa Network</span>
+                    </div>
+                    <div class="tl-i rv"><small>01 MAR 2020 – 30 MAR 2020 · 1 BULAN</small>
+                        <h3>Programmer</h3><span class="co">PT. GreenNusa Computindo</span>
+                    </div>
+                    <div class="tl-i rv"><small>01 JAN 2019 – 30 MAR 2019 · 3 BULAN</small>
+                        <h3>IT Support</h3><span class="co">UD. Bangkit CCTV &amp; Printer</span>
+                    </div>
+                    <div class="tl-i rv"><small>01 JAN 2010 – 30 JUN 2021 · 11 TAHUN 6 BULAN</small>
+                        <h3>Freelance</h3><span class="co">PT. Kemandirian Pangan</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certs">
+            <div class="wrap">
+                <span class="tag">// TANDA JASA</span>
+                <h2>Sertifikasi</h2>
+                <div class="certs">
+                    <div class="card cert rv">
+                        <div class="ic">🎖️</div>
+                        <div>
+                            <h3>Mobile Development</h3>
+                            <p>Bangkit Academy · 2024</p><a href="#">Verifikasi kredensial ↗</a>
+                        </div>
+                    </div>
+                    <div class="card cert rv">
+                        <div class="ic">☕</div>
+                        <div>
+                            <h3>Nama Sertifikasi Java</h3>
+                            <p>Penerbit · Tahun</p><a href="#">Verifikasi kredensial ↗</a>
+                        </div>
+                    </div>
+                    <div class="card cert rv">
+                        <div class="ic">🌐</div>
+                        <div>
+                            <h3>Nama Sertifikasi Jaringan</h3>
+                            <p>Penerbit · Tahun</p><a href="#">Verifikasi kredensial ↗</a>
+                        </div>
+                    </div>
+                    <div class="card cert rv">
+                        <div class="ic">📜</div>
+                        <div>
+                            <h3>Sertifikat Lain</h3>
+                            <p>Penerbit · Tahun</p><a href="#">Verifikasi kredensial ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="wrap contact rv">
+                <span class="tag">// KOMUNIKASI</span>
+                <h2>Buka Kanal</h2>
+                <p class="lead" style="margin-inline:auto">Punya misi atau lowongan? Siap menerima transmisi.</p>
+                <div class="btns"><a class="btn p" href="mailto:email@anda.com">Kirim Email</a><a class="btn"
+                        href="https://github.com/" target="_blank" rel="noopener">GitHub</a><a class="btn"
+                        href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></div>
+            </div>
+        </section>
+    </main>
+    <footer>© <span id="yr"></span> RISKI AR // TRANSMISI SELESAI ▮</footer>
+    <script>
+        let roles = ["Java Developer", "Mobile Developer", "Software Engineer", "Petani"];
+        const el = document.getElementById('role'); let ri = 0, ci = 0, del = false;
+        (function type() {
+            const w = roles[ri]; ci += del ? -1 : 1; el.textContent = w.slice(0, ci); let t = del ? 40 : 80;
+            if (!del && ci === w.length) { del = true; t = 1400 } else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; t = 300 } setTimeout(type, t)
+        })();
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (!e.isIntersecting) return; e.target.classList.add('in');
+            e.target.querySelectorAll('[data-w]').forEach(b => b.style.width = b.dataset.w + '%');
+            e.target.querySelectorAll('[data-n]').forEach(c => { const n = +c.dataset.n; let i = 0; const s = setInterval(() => { c.textContent = ++i; if (i >= n) clearInterval(s) }, 900 / n) });
+            io.unobserve(e.target)
+        }), { threshold: .15 });
+        document.querySelectorAll('.rv').forEach(e => io.observe(e));
+        document.getElementById('filters').addEventListener('click', e => {
+            const b = e.target.closest('button'); if (!b) return;
+            document.querySelectorAll('#filters button').forEach(x => x.classList.toggle('on', x === b));
+            document.querySelectorAll('#projects .proj').forEach(p => p.classList.toggle('hide', b.dataset.f !== 'all' && p.dataset.c !== b.dataset.f))
+        });
+        const root = document.documentElement;
+        try { const s = localStorage.getItem('theme'); if (s) root.dataset.theme = s } catch (e) { }
+        document.getElementById('theme').onclick = () => { const n = root.dataset.theme === 'dark' ? 'light' : 'dark'; root.dataset.theme = n; try { localStorage.setItem('theme', n) } catch (e) { } };
+        document.getElementById('yr').textContent = new Date().getFullYear();
+        // ===== I18N: ID / EN =====
+        const T = {
+            "STATUS: SIAGA // CLEARANCE: LEVEL 5 // GRID: 00°28'S 117°09'E // MISI: BANGUN SOFTWARE ANDAL // CALLSIGN: RISKI-AR // STATUS: SIAGA // CLEARANCE: LEVEL 5 //": "STATUS: STANDBY // CLEARANCE: LEVEL 5 // GRID: 00°28'S 117°09'E // MISSION: BUILD RELIABLE SOFTWARE // CALLSIGN: RISKI-AR // STATUS: STANDBY // CLEARANCE: LEVEL 5 //",
+            "Dossier": "Dossier", "Loadout": "Loadout", "Misi": "Missions", "Rekam Dinas": "Service Record", "Tanda Jasa": "Commendations", "Komunikasi": "Comms",
+            "OPERATOR AKTIF — SIAP DITUGASKAN": "ACTIVE OPERATOR — READY FOR DEPLOYMENT",
+            "Software engineer berfokus pada Android & Java. Disiplin, presisi, dan tuntas — dari layar ponsel sampai ke ladang.": "Software engineer focused on Android & Java. Disciplined, precise, and thorough — from phone screens to the farm.",
+            "Lihat Misi": "View Missions", "Buka Kanal": "Open Channel",
+            "NRP": "ID NO", "KORPS": "BRANCH", "SATUAN": "UNIT", "KLEARANS": "CLEARANCE",
+            "Penugasan": "Assignments", "Misi selesai": "Missions done", "Bulan Bangkit": "Months at Bangkit", "Tahun freelance": "Years freelancing",
+            "// DOSSIER PERSONEL": "// PERSONNEL DOSSIER", "Brifing": "Briefing", "TERBUKA": "OPEN",
+            "Latar belakang": "Background",
+            "Lulusan SMK jurusan Teknik Komputer dan Jaringan, kini menempuh studi di Universitas Mulawarman. Berkomitmen terus belajar dan berkembang di bidang software, khususnya pengembangan Android.": "Vocational high school graduate in Computer and Network Engineering, now studying at Mulawarman University. Committed to continuous learning and growth in software, especially Android development.",
+            "Jaringan": "Network",
+            "Pelatihan lapangan": "Field training",
+            "Magang 1–3 bulan di ISP, konsultan IT, dan jasa komputer & CCTV. Terbiasa troubleshooting hardware dan software.": "1–3 month internships at an ISP, an IT consultancy, and a computer & CCTV service provider. Experienced in hardware and software troubleshooting.",
+            "Misi sampingan": "Side mission",
+            "🌱 Petani — disiplin dan kesabaran dari ladang ikut membentuk cara kerja.": "🌱 Farmer — the discipline and patience of the field shape how I work.",
+            "// LOADOUT": "// LOADOUT", "Persenjataan": "Arsenal",
+            "Mahir": "Advanced", "Menengah–Mahir": "Intermediate–Advanced", "Menengah": "Intermediate",
+            "Membangun aplikasi dengan OOP, struktur data, dan akses database SQL.": "Building applications with OOP, data structures, and SQL database access.",
+            "Mengembangkan aplikasi mobile: antarmuka, konsumsi REST API, dan Firebase (Bangkit Academy).": "Developing mobile apps: interfaces, REST API consumption, and Firebase (Bangkit Academy).",
+            "Jaringan & Troubleshooting": "Networking & Troubleshooting",
+            "Konfigurasi jaringan, instalasi CCTV, serta diagnosis masalah hardware dan software.": "Network configuration, CCTV installation, and hardware and software diagnostics.",
+            "Membuat halaman responsif dan interaktif secara mandiri.": "Building responsive and interactive pages independently.",
+            "DASAR — memahami konsep": "BASIC — understands the concepts",
+            "MENENGAH — bekerja mandiri pada tugas nyata": "INTERMEDIATE — works independently on real tasks",
+            "MAHIR — merancang solusi & dapat membimbing orang lain": "ADVANCED — designs solutions & can mentor others",
+            "// PERALATAN": "// EQUIPMENT", "Teknologi": "Technology",
+            "// ARSIP OPERASI": "// OPERATIONS ARCHIVE",
+            "Semua": "All", "Lainnya": "Other", "SELESAI": "DONE", "AKTIF": "ACTIVE",
+            "Aplikasi Android 1": "Android App 1",
+            "Deskripsi singkat misi dan masalah yang diselesaikan.": "Short description of the mission and the problem it solves.",
+            "Proyek akhir Bangkit Academy sebagai Mobile Developer.": "Bangkit Academy final project as a Mobile Developer.",
+            "Aplikasi Java": "Java Application",
+            "Aplikasi berbasis Java dengan arsitektur bersih.": "Java-based application with clean architecture.",
+            "Layanan backend pendukung aplikasi mobile.": "Backend service supporting mobile apps.",
+            "Digitalisasi Pertanian": "Agricultural Digitalization",
+            "Menghubungkan teknologi dengan pertanian.": "Connecting technology with agriculture.",
+            "Riset": "Research",
+            "Instalasi CCTV & Jaringan": "CCTV & Network Installation",
+            "Pemasangan dan konfigurasi jaringan serta CCTV.": "Installing and configuring networks and CCTV.",
+            "// REKAM DINAS": "// SERVICE RECORD",
+            "// TANDA JASA": "// COMMENDATIONS", "Sertifikasi": "Certifications",
+            "Nama Sertifikasi Java": "Java Certification Name", "Nama Sertifikasi Jaringan": "Networking Certification Name", "Sertifikat Lain": "Other Certificate",
+            "Penerbit · Tahun": "Issuer · Year", "Verifikasi kredensial ↗": "Verify credential ↗",
+            "// KOMUNIKASI": "// COMMUNICATIONS",
+            "Punya misi atau lowongan? Siap menerima transmisi.": "Got a mission or a job opening? Ready to receive transmissions.",
+            "Kirim Email": "Send Email",
+            "RISKI AR // TRANSMISI SELESAI ▮": "RISKI AR // TRANSMISSION COMPLETE ▮"
+        };
+        const RL = { id: ["Java Developer", "Mobile Developer", "Software Engineer", "Petani & pencinta kerja"], en: ["Java Developer", "Mobile Developer", "Software Engineer", "Farmer & work enthusiast"] };
+        const DW = { en: { BULAN: 'MONTHS', MINGGU: 'WEEKS', TAHUN: 'YEARS' } };
+        const srcMap = new WeakMap(); let LG = 'id';
+        function tr(s, l) {
+            if (l === 'id') return s; const e = T[s]; if (e) return e;
+            if (/BULAN|TAHUN|MINGGU/.test(s)) return s.replace(/BULAN|TAHUN|MINGGU/g, w => DW[l][w]).replace(/\b1 MONTHS/, '1 MONTH').replace(/\b1 YEARS/, '1 YEAR'); return s
+        }
+        function applyLang(l) {
+            if (l) LG = l; const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+            while (n = w.nextNode()) {
+                const p = n.parentElement; if (!p || /^(SCRIPT|STYLE)$/.test(p.tagName) || p.id === 'role') continue;
+                if (!srcMap.has(n)) srcMap.set(n, n.data); const m = srcMap.get(n).match(/^(\s*)([\s\S]*?)(\s*)$/); if (!m[2]) continue; n.data = m[1] + tr(m[2], LG) + m[3]
+            }
+            document.documentElement.lang = LG; roles = RL[LG]; ri = 0; ci = 0; del = false;
+            document.querySelectorAll('#lang button').forEach(b => b.classList.toggle('on', b.dataset.l === LG))
+        }
+        window.applyLang = applyLang;
+        document.getElementById('lang').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; applyLang(b.dataset.l); try { localStorage.setItem('lang', b.dataset.l) } catch (x) { } });
+        try { const sl = localStorage.getItem('lang'); if (sl === 'en') applyLang(sl) } catch (e) { }
+    </script>
+</body>
+
+</html>
